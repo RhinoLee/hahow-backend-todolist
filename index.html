@@ -1,574 +1,730 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<!-- CSS -->
-	<link rel="stylesheet" href="_css/reset.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<link rel="stylesheet" href="_css/style.css">
-	<link rel="stylesheet" href="_css/media.css">
-	
-	<!-- JS -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<title>TodoList</title>
-</head>
-<body>
-	<div>
-		<div id="top" class="container-fluid">
-			<div class="row">
-				<div class="col-3">
-					<div id="weather" class="txt-center">
-						<img src="../_img/sunny.png" class="icon">
-						<span>36&deg;C</span>
-					</div>
-				</div>
-				<div class="col-6">
-					<div id="title" class="txt-center">
-						<h1>TODO LIST</h1>
-					</div>
-				</div>
-				<div class="col-3">
-					<div id="login-info" class="txt-center">
-						<img class="headshot">
-						<span>使用者 | 登出</span>
-					</div>
-					<div id="login-info" class="txt-center" style="display: none;">
-						<img class="headshot">
-						<span>登入</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="content" class="container-fluid">
-			<div class="row">
-				<div class="col-md-3">
-					<div id="left-block">
-						<div class="todo-date">
-							<div class="headline txt-center">
-								<h3>代辦事項</h3>
-							</div>
+    <!-- CSS -->
+    <link rel="stylesheet" href="_css/reset.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="_css/style.css" />
+    <link rel="stylesheet" href="_css/media.css" />
 
-							<div class="accordion" id="list-date">
-								<div class="accordion-item item-year">
-								  	<h2 class="accordion-header" id="2021year">
-										<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#y2021" aria-expanded="true" aria-controls="y2021">
-											2021年
-										</button>
-								  	</h2>
-								  	<div id="y2021" class="accordion-collapse collapse show" aria-labelledby="2021year" data-bs-parent="#list-date">
-										<div class="accordion-body">
-											<div class="accordion" id="aavvv">
-												<div class="accordion-item item-month">
-												  	<h2 class="accordion-header" id="headingOne">
-														<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-													  		07月
-														</button>
-												  	</h2>
-												  	<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#aavvv">
-														<div class="accordion-body date-block">
-															<ul>
-																<li>
-																	<a href="#">07月18日</a>
-																</li>
-																<li>
-																	<a href="#">07月17日</a>
-																</li>
-																<li>
-																	<a href="#">07月16日</a>
-																</li>
-																<li>
-																	<a href="#">07月15日</a>
-																</li>
-																<li>
-																	<a href="#">07月14日</a>
-																</li>
-																<li>
-																	<a href="#">07月13日</a>
-																</li>
-																<li>
-																	<a href="#">07月12日</a>
-																</li>
-																<li>
-																	<a href="#">07月11日</a>
-																</li>
-																<li>
-																	<a href="#">07月10日</a>
-																</li>
-																<li>
-																	<a href="#">07月09日</a>
-																</li>
-																<li>
-																	<a href="#">07月08日</a>
-																</li>
-																<li>
-																	<a href="#">07月06日</a>
-																</li>
-																<li>
-																	<a href="#">07月06日</a>
-																</li>
-																<li>
-																	<a href="#">07月05日</a>
-																</li>
-																<li>
-																	<a href="#">07月04日</a>
-																</li>
-																<li>
-																	<a href="#">07月03日</a>
-																</li>
-																<li>
-																	<a href="#">07月02日</a>
-																</li>
-																<li>
-																	<a href="#">07月01日</a>
-																</li>
-															</ul>
-														</div>
-												  	</div>
-												</div>
-												<div class="accordion-item item-month">
-												  	<h2 class="accordion-header" id="headingTwo">
-														<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-															06月
-														</button>
-												  	</h2>
-												  	<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#aavvv">
-														<div class="accordion-body date-block">
-															<ul>
-																<li>
-																	<a href="#">06月30日</a>
-																</li>
-																<li>
-																	<a href="#">06月29日</a>
-																</li>
-																<li>
-																	<a href="#">06月28日</a>
-																</li>
-																<li>
-																	<a href="#">06月27日</a>
-																</li>
-																<li>
-																	<a href="#">06月26日</a>
-																</li>
-																<li>
-																	<a href="#">06月25日</a>
-																</li>
-																<li>
-																	<a href="#">06月24日</a>
-																</li>
-																<li>
-																	<a href="#">06月23日</a>
-																</li>
-																<li>
-																	<a href="#">06月22日</a>
-																</li>
-																<li>
-																	<a href="#">06月21日</a>
-																</li>
-																<li>
-																	<a href="#">06月20日</a>
-																</li>
-																<li>
-																	<a href="#">06月19日</a>
-																</li>
-																<li>
-																	<a href="#">06月18日</a>
-																</li>
-																<li>
-																	<a href="#">06月17日</a>
-																</li>
-																<li>
-																	<a href="#">06月16日</a>
-																</li>
-																<li>
-																	<a href="#">06月15日</a>
-																</li>
-																<li>
-																	<a href="#">06月14日</a>
-																</li>
-																<li>
-																	<a href="#">06月13日</a>
-																</li>
-																<li>
-																	<a href="#">06月12日</a>
-																</li>
-																<li>
-																	<a href="#">06月11日</a>
-																</li>
-																<li>
-																	<a href="#">06月10日</a>
-																</li>
-																<li>
-																	<a href="#">06月09日</a>
-																</li>
-																<li>
-																	<a href="#">06月08日</a>
-																</li>
-																<li>
-																	<a href="#">06月06日</a>
-																</li>
-																<li>
-																	<a href="#">06月06日</a>
-																</li>
-																<li>
-																	<a href="#">06月05日</a>
-																</li>
-																<li>
-																	<a href="#">06月04日</a>
-																</li>
-																<li>
-																	<a href="#">06月03日</a>
-																</li>
-																<li>
-																	<a href="#">06月02日</a>
-																</li>
-																<li>
-																	<a href="#">06月01日</a>
-																</li>
-															</ul>
-														</div>
-												  	</div>
-												</div>
-												<div class="accordion-item item-month">
-													<h2 class="accordion-header" id="headingThree">
-														<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-															05月
-														</button>
-												  	</h2>
-												  	<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#aavvv">
-														<div class="accordion-body date-block">
-													  		
-														</div>
-												  	</div>
-												</div>
-											</div>
-										</div>
-								  	</div>
-								</div>
+    <!-- JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
 
-								<div class="accordion-item item-year">
-								  	<h2 class="accordion-header" id="2020year">
-										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#y2020" aria-expanded="false" aria-controls="y2020">
-											2020年
-										</button>
-									</h2>
-								  	<div id="y2020" class="accordion-collapse collapse" aria-labelledby="2020year" data-bs-parent="#list-date">
-										<div class="accordion-body">
-											
-										</div>
-								  	</div>
-								</div>
-								
-								<div class="accordion-item item-year">
-								  	<h2 class="accordion-header" id="2019year">
-										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#y2019" aria-expanded="false" aria-controls="y2019">
-											2019年
-										</button>
-								  	</h2>
-								  	<div id="y2019" class="accordion-collapse collapse" aria-labelledby="2019year" data-bs-parent="#list-date">
-										<div class="accordion-body">
-									  		
-										</div>
-								  	</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="todo-date">
-							<div class="headline txt-center">
-								<h3>完成事項</h3>
-							</div>
-							<div class="accordion" id="list-date-ok">
-								<div class="accordion-item item-year">
-								  	<h2 class="accordion-header" id="2021year-ok">
-										<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#y2021-ok" aria-expanded="true" aria-controls="y2021-ok">
-											2021年
-										</button>
-								  	</h2>
-								  	<div id="y2021-ok" class="accordion-collapse collapse" aria-labelledby="2021year-ok" data-bs-parent="#list-date-ok">
-										<div class="accordion-body">
-											<div class="accordion" id="monthok">
-												<div class="accordion-item item-month">
-												  	<h2 class="accordion-header" id="headingOneOk">
-														<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneok" aria-expanded="true" aria-controls="collapseOneok">
-													  		07月
-														</button>
-												  	</h2>
-												  	<div id="collapseOneok" class="accordion-collapse collapse" aria-labelledby="headingOneOk" data-bs-parent="#monthok">
-														<div class="accordion-body date-block">
-															<ul>
-																<li>
-																	<a href="#">07月18日</a>
-																</li>
-																<li>
-																	<a href="#">07月17日</a>
-																</li>
-																<li>
-																	<a href="#">07月16日</a>
-																</li>
-																<li>
-																	<a href="#">07月15日</a>
-																</li>
-																<li>
-																	<a href="#">07月14日</a>
-																</li>
-																<li>
-																	<a href="#">07月13日</a>
-																</li>
-																<li>
-																	<a href="#">07月12日</a>
-																</li>
-																<li>
-																	<a href="#">07月11日</a>
-																</li>
-																<li>
-																	<a href="#">07月10日</a>
-																</li>
-																<li>
-																	<a href="#">07月09日</a>
-																</li>
-																<li>
-																	<a href="#">07月08日</a>
-																</li>
-																<li>
-																	<a href="#">07月06日</a>
-																</li>
-																<li>
-																	<a href="#">07月06日</a>
-																</li>
-																<li>
-																	<a href="#">07月05日</a>
-																</li>
-																<li>
-																	<a href="#">07月04日</a>
-																</li>
-																<li>
-																	<a href="#">07月03日</a>
-																</li>
-																<li>
-																	<a href="#">07月02日</a>
-																</li>
-																<li>
-																	<a href="#">07月01日</a>
-																</li>
-															</ul>
-														</div>
-												  	</div>
-												</div>
-												<div class="accordion-item item-month">
-												  	<h2 class="accordion-header" id="headingTwoOk">
-														<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoOk" aria-expanded="false" aria-controls="collapseTwoOk">
-															06月
-														</button>
-												  	</h2>
-												  	<div id="collapseTwoOk" class="accordion-collapse collapse" aria-labelledby="headingTwoOk" data-bs-parent="#monthok">
-														<div class="accordion-body date-block">
-															<ul>
-																<li>
-																	<a href="#">06月30日</a>
-																</li>
-																<li>
-																	<a href="#">06月29日</a>
-																</li>
-																<li>
-																	<a href="#">06月28日</a>
-																</li>
-																<li>
-																	<a href="#">06月27日</a>
-																</li>
-																<li>
-																	<a href="#">06月26日</a>
-																</li>
-																<li>
-																	<a href="#">06月25日</a>
-																</li>
-																<li>
-																	<a href="#">06月24日</a>
-																</li>
-																<li>
-																	<a href="#">06月23日</a>
-																</li>
-																<li>
-																	<a href="#">06月22日</a>
-																</li>
-																<li>
-																	<a href="#">06月21日</a>
-																</li>
-																<li>
-																	<a href="#">06月20日</a>
-																</li>
-																<li>
-																	<a href="#">06月19日</a>
-																</li>
-																<li>
-																	<a href="#">06月18日</a>
-																</li>
-																<li>
-																	<a href="#">06月17日</a>
-																</li>
-																<li>
-																	<a href="#">06月16日</a>
-																</li>
-																<li>
-																	<a href="#">06月15日</a>
-																</li>
-																<li>
-																	<a href="#">06月14日</a>
-																</li>
-																<li>
-																	<a href="#">06月13日</a>
-																</li>
-																<li>
-																	<a href="#">06月12日</a>
-																</li>
-																<li>
-																	<a href="#">06月11日</a>
-																</li>
-																<li>
-																	<a href="#">06月10日</a>
-																</li>
-																<li>
-																	<a href="#">06月09日</a>
-																</li>
-																<li>
-																	<a href="#">06月08日</a>
-																</li>
-																<li>
-																	<a href="#">06月06日</a>
-																</li>
-																<li>
-																	<a href="#">06月06日</a>
-																</li>
-																<li>
-																	<a href="#">06月05日</a>
-																</li>
-																<li>
-																	<a href="#">06月04日</a>
-																</li>
-																<li>
-																	<a href="#">06月03日</a>
-																</li>
-																<li>
-																	<a href="#">06月02日</a>
-																</li>
-																<li>
-																	<a href="#">06月01日</a>
-																</li>
-															</ul>
-														</div>
-												  	</div>
-												</div>
-												<div class="accordion-item item-month">
-													<h2 class="accordion-header" id="headingThreeOk">
-														<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreeOk" aria-expanded="false" aria-controls="collapseThreeOk">
-															05月
-														</button>
-												  	</h2>
-												  	<div id="collapseThreeOk" class="accordion-collapse collapse" aria-labelledby="headingThreeOk" data-bs-parent="#monthok">
-														<div class="accordion-body date-block">
-													  		
-														</div>
-												  	</div>
-												</div>
-											</div>
-										</div>
-								  	</div>
-								</div>
+    <title>TodoList</title>
+  </head>
+  <body>
+    <div>
+      <div id="top" class="container-fluid">
+        <div class="row">
+          <div class="col-3">
+            <div id="weather" class="txt-center">
+              <img src="../_img/sunny.png" class="icon" />
+              <span>36&deg;C</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div id="title" class="txt-center">
+              <h1>TODO LIST</h1>
+            </div>
+          </div>
+          <div class="col-3">
+            <div id="login-info" class="txt-center">
+              <img class="headshot" />
+              <span>使用者 | 登出</span>
+            </div>
+            <div id="login-info" class="txt-center" style="display: none">
+              <img class="headshot" />
+              <span>登入</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="content" class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+            <div id="left-block">
+              <div class="todo-date">
+                <div class="headline txt-center">
+                  <h3>代辦事項</h3>
+                </div>
 
-								<div class="accordion-item item-year">
-								  	<h2 class="accordion-header" id="2020year-ok">
-										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#y2020-ok" aria-expanded="false" aria-controls="y2020-ok">
-											2020年
-										</button>
-									</h2>
-								  	<div id="y2020-ok" class="accordion-collapse collapse" aria-labelledby="2020year-ok" data-bs-parent="#list-date-ok">
-										<div class="accordion-body">
-											
-										</div>
-								  	</div>
-								</div>
-								
-								<div class="accordion-item item-year">
-								  	<h2 class="accordion-header" id="2019year-ok">
-										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#y2019-ok" aria-expanded="false" aria-controls="y2019-ok">
-											2019年
-										</button>
-								  	</h2>
-								  	<div id="y2019-ok" class="accordion-collapse collapse" aria-labelledby="2019year-ok" data-bs-parent="#list-date-ok">
-										<div class="accordion-body">
-									  		
-										</div>
-								  	</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-9">
-					<div id="right-block">
-						<div id="additem" class="txt-center">
-							<input type="date" class="input-control" value="">
-							<input type="text" class="input-control" placeholder="看線上課程一單元">
-						</div>
-						<hr/>
-						<div class="date-todo">
-							<h3>2021/07/18</h3>
-							<div class="row">
-								<div class="col-md-2">
-									<h2>DOING</h2>
-								</div>
-								<div class="col-md-10">
-									<ul>
-										<li>
-											<div class="item">
-												<input type="checkbox"> <span>瑜珈一小時</span> <input type="button" class="close" value="x">
-											</div>
-										</li>
-										<li>
-											<div class="item">
-												<input type="checkbox"> <span>想一個SideProject</span> <input type="button" class="close" value="x">
-											</div>
-										</li>
-										<li>
-											<div class="item">
-												<input type="checkbox"> <span>線上課程看一單元</span> <input type="button" class="close" value="x">
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<hr/>
-							<div class="row">
-								<div class="col-md-2">
-									<h2>DONE</h2>
-								</div>
-								<div class="col-md-10">
-									<ul>
-										<li>
-											<div class="item">
-												<input type="checkbox" checked="true"> <span>背10個單字</span> <input type="button" class="close" value="x">
-											</div>
-										</li>
-										<li>
-											<div class="item">
-												<input type="checkbox" checked="true"> <span>整理書櫃</span> <input type="button" class="close" value="x">
-											</div>
-										</li>
-										<li>
-											<div class="item">
-												<input type="checkbox" checked="true"> <span>寫一篇文章</span> <input type="button" class="close" value="x">
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
+                <div class="accordion" id="list-date">
+                  <div class="accordion-item item-year">
+                    <h2 class="accordion-header" id="2021year">
+                      <button
+                        class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#y2021"
+                        aria-expanded="true"
+                        aria-controls="y2021"
+                      >
+                        2021年
+                      </button>
+                    </h2>
+                    <div
+                      id="y2021"
+                      class="accordion-collapse collapse show"
+                      aria-labelledby="2021year"
+                      data-bs-parent="#list-date"
+                    >
+                      <div class="accordion-body">
+                        <div class="accordion" id="aavvv">
+                          <div class="accordion-item item-month">
+                            <h2 class="accordion-header" id="headingOne">
+                              <button
+                                class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne"
+                                aria-expanded="true"
+                                aria-controls="collapseOne"
+                              >
+                                07月
+                              </button>
+                            </h2>
+                            <div
+                              id="collapseOne"
+                              class="accordion-collapse collapse show"
+                              aria-labelledby="headingOne"
+                              data-bs-parent="#aavvv"
+                            >
+                              <div class="accordion-body date-block">
+                                <ul>
+                                  <li>
+                                    <a href="#">07月18日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月17日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月16日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月15日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月14日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月13日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月12日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月11日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月10日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月09日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月08日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月06日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月06日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月05日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月04日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月03日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月02日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月01日</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="accordion-item item-month">
+                            <h2 class="accordion-header" id="headingTwo">
+                              <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo"
+                                aria-expanded="false"
+                                aria-controls="collapseTwo"
+                              >
+                                06月
+                              </button>
+                            </h2>
+                            <div
+                              id="collapseTwo"
+                              class="accordion-collapse collapse"
+                              aria-labelledby="headingTwo"
+                              data-bs-parent="#aavvv"
+                            >
+                              <div class="accordion-body date-block">
+                                <ul>
+                                  <li>
+                                    <a href="#">06月30日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月29日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月28日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月27日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月26日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月25日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月24日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月23日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月22日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月21日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月20日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月19日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月18日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月17日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月16日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月15日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月14日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月13日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月12日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月11日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月10日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月09日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月08日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月06日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月06日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月05日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月04日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月03日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月02日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月01日</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="accordion-item item-month">
+                            <h2 class="accordion-header" id="headingThree">
+                              <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree"
+                                aria-expanded="false"
+                                aria-controls="collapseThree"
+                              >
+                                05月
+                              </button>
+                            </h2>
+                            <div
+                              id="collapseThree"
+                              class="accordion-collapse collapse"
+                              aria-labelledby="headingThree"
+                              data-bs-parent="#aavvv"
+                            >
+                              <div class="accordion-body date-block"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="accordion-item item-year">
+                    <h2 class="accordion-header" id="2020year">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#y2020"
+                        aria-expanded="false"
+                        aria-controls="y2020"
+                      >
+                        2020年
+                      </button>
+                    </h2>
+                    <div
+                      id="y2020"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="2020year"
+                      data-bs-parent="#list-date"
+                    >
+                      <div class="accordion-body"></div>
+                    </div>
+                  </div>
+
+                  <div class="accordion-item item-year">
+                    <h2 class="accordion-header" id="2019year">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#y2019"
+                        aria-expanded="false"
+                        aria-controls="y2019"
+                      >
+                        2019年
+                      </button>
+                    </h2>
+                    <div
+                      id="y2019"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="2019year"
+                      data-bs-parent="#list-date"
+                    >
+                      <div class="accordion-body"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="todo-date">
+                <div class="headline txt-center">
+                  <h3>完成事項</h3>
+                </div>
+                <div class="accordion" id="list-date-ok">
+                  <div class="accordion-item item-year">
+                    <h2 class="accordion-header" id="2021year-ok">
+                      <button
+                        class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#y2021-ok"
+                        aria-expanded="true"
+                        aria-controls="y2021-ok"
+                      >
+                        2021年
+                      </button>
+                    </h2>
+                    <div
+                      id="y2021-ok"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="2021year-ok"
+                      data-bs-parent="#list-date-ok"
+                    >
+                      <div class="accordion-body">
+                        <div class="accordion" id="monthok">
+                          <div class="accordion-item item-month">
+                            <h2 class="accordion-header" id="headingOneOk">
+                              <button
+                                class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseOneok"
+                                aria-expanded="true"
+                                aria-controls="collapseOneok"
+                              >
+                                07月
+                              </button>
+                            </h2>
+                            <div
+                              id="collapseOneok"
+                              class="accordion-collapse collapse"
+                              aria-labelledby="headingOneOk"
+                              data-bs-parent="#monthok"
+                            >
+                              <div class="accordion-body date-block">
+                                <ul>
+                                  <li>
+                                    <a href="#">07月18日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月17日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月16日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月15日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月14日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月13日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月12日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月11日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月10日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月09日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月08日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月06日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月06日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月05日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月04日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月03日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月02日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">07月01日</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="accordion-item item-month">
+                            <h2 class="accordion-header" id="headingTwoOk">
+                              <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwoOk"
+                                aria-expanded="false"
+                                aria-controls="collapseTwoOk"
+                              >
+                                06月
+                              </button>
+                            </h2>
+                            <div
+                              id="collapseTwoOk"
+                              class="accordion-collapse collapse"
+                              aria-labelledby="headingTwoOk"
+                              data-bs-parent="#monthok"
+                            >
+                              <div class="accordion-body date-block">
+                                <ul>
+                                  <li>
+                                    <a href="#">06月30日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月29日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月28日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月27日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月26日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月25日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月24日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月23日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月22日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月21日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月20日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月19日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月18日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月17日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月16日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月15日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月14日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月13日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月12日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月11日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月10日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月09日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月08日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月06日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月06日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月05日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月04日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月03日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月02日</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">06月01日</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="accordion-item item-month">
+                            <h2 class="accordion-header" id="headingThreeOk">
+                              <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseThreeOk"
+                                aria-expanded="false"
+                                aria-controls="collapseThreeOk"
+                              >
+                                05月
+                              </button>
+                            </h2>
+                            <div
+                              id="collapseThreeOk"
+                              class="accordion-collapse collapse"
+                              aria-labelledby="headingThreeOk"
+                              data-bs-parent="#monthok"
+                            >
+                              <div class="accordion-body date-block"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="accordion-item item-year">
+                    <h2 class="accordion-header" id="2020year-ok">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#y2020-ok"
+                        aria-expanded="false"
+                        aria-controls="y2020-ok"
+                      >
+                        2020年
+                      </button>
+                    </h2>
+                    <div
+                      id="y2020-ok"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="2020year-ok"
+                      data-bs-parent="#list-date-ok"
+                    >
+                      <div class="accordion-body"></div>
+                    </div>
+                  </div>
+
+                  <div class="accordion-item item-year">
+                    <h2 class="accordion-header" id="2019year-ok">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#y2019-ok"
+                        aria-expanded="false"
+                        aria-controls="y2019-ok"
+                      >
+                        2019年
+                      </button>
+                    </h2>
+                    <div
+                      id="y2019-ok"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="2019year-ok"
+                      data-bs-parent="#list-date-ok"
+                    >
+                      <div class="accordion-body"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div id="right-block">
+              <div id="additem" class="txt-center">
+                <input type="date" class="input-control" value="" />
+                <input
+                  type="text"
+                  class="input-control"
+                  placeholder="看線上課程一單元"
+                />
+              </div>
+              <hr />
+              <div class="date-todo">
+                <h3>2021/07/18</h3>
+                <div class="row">
+                  <div class="col-md-2">
+                    <h2>DOING</h2>
+                  </div>
+                  <div class="col-md-10">
+                    <ul>
+                      <li>
+                        <div class="item">
+                          <input type="checkbox" /> <span>瑜珈一小時</span>
+                          <input type="button" class="close" value="x" />
+                        </div>
+                      </li>
+                      <li>
+                        <div class="item">
+                          <input type="checkbox" />
+                          <span>想一個SideProject</span>
+                          <input type="button" class="close" value="x" />
+                        </div>
+                      </li>
+                      <li>
+                        <div class="item">
+                          <input type="checkbox" />
+                          <span>線上課程看一單元</span>
+                          <input type="button" class="close" value="x" />
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-md-2">
+                    <h2>DONE</h2>
+                  </div>
+                  <div class="col-md-10">
+                    <ul>
+                      <li>
+                        <div class="item">
+                          <input type="checkbox" checked="true" />
+                          <span>背10個單字</span>
+                          <input type="button" class="close" value="x" />
+                        </div>
+                      </li>
+                      <li>
+                        <div class="item">
+                          <input type="checkbox" checked="true" />
+                          <span>整理書櫃</span>
+                          <input type="button" class="close" value="x" />
+                        </div>
+                      </li>
+                      <li>
+                        <div class="item">
+                          <input type="checkbox" checked="true" />
+                          <span>寫一篇文章</span>
+                          <input type="button" class="close" value="x" />
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
