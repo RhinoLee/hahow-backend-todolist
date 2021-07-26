@@ -1,0 +1,31 @@
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  #top span {
+    font-size: 23px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #top {
+    line-height: 0px;
+  }
+  #top span {
+    font-size: 20px !important;
+    margin-top: 15px;
+  }
+  #top #weather, #top #login-info {
+    width: 100%;
+    display: -ms-inline-grid;
+    display: inline-grid;
+  }
+  #top #weather img, #top #login-info img {
+    display: block;
+    margin: 0 auto;
+  }
+  #top #weather {
+    margin-top: 10px;
+  }
+  #top #login-info {
+    margin-top: 15px;
+  }
+}
+/*# sourceMappingURL=media.css.map */
