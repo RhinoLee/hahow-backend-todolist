@@ -13,10 +13,11 @@ block content
             h1 TODO LIST
         .col-3
           #login-info.txt-center
-            img.headshot
-            span 使用者 | 登出
-          #login-info.txt-center(style="display: none;")
-            span 登入
+            if user
+              img.headshot
+              span #{user.name} | 登出
+            else
+              span 登入
     #content.container-fluid
       .row
         .col-md-3
