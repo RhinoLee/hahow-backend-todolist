@@ -50,21 +50,21 @@ body {
   padding-bottom: 10px;
 }
 
-#content #left-block .todo-date .headline h3 {
+#content #left-block .todo-date .headline h2 {
   font-weight: bold;
   margin-bottom: 0px;
 }
 
-#content #left-block .todo-date .item-year h2 button {
+#content #left-block .todo-date .item-year h3 button {
   font-size: 22px;
   font-weight: bold;
 }
 
-#content #left-block .todo-date .item-year > h2 button {
+#content #left-block .todo-date .item-year > h3 button {
   color: #084887;
 }
 
-#content #left-block .todo-date .item-year .item-month > h2 button {
+#content #left-block .todo-date .item-year .item-month > h3 button {
   color: #429EA6;
 }
 
@@ -99,11 +99,11 @@ body {
   margin: 20px;
 }
 
-#content #right-block .date-todo h2 {
+#content #right-block .date-todo h3 {
   text-align: center;
 }
 
-#content #right-block .date-todo h3 {
+#content #right-block .date-todo h2 {
   margin-bottom: 20px;
 }
 

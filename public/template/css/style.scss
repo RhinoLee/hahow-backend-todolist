@@ -63,28 +63,28 @@ body {
         padding-top: 10px;
         padding-bottom: 10px;
 
-        h3 {
+        h2 {
           font-weight: bold;
           margin-bottom: 0px;
         }
       }
 
       .item-year {
-        h2 {
+        h3 {
           button {
             font-size: 22px;
             font-weight: bold;
           }
         }
 
-        & > h2 {
+        & > h3 {
           button {
             color: $main-color;
           }
         }
 
         .item-month {
-          & > h2 {
+          & > h3 {
             button {
               color: #429ea6;
             }
@@ -129,11 +129,11 @@ body {
     }
 
     .date-todo {
-      h2 {
+      h3 {
         text-align: center;
       }
 
-      h3 {
+      h2 {
         margin-bottom: 20px;
       }
 
