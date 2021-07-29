@@ -29,46 +29,19 @@ block content
                 input.input-control(type="date", name="itemDate")
                 input.input-control(type="text", name="itemText", placeholder="請輸入待辦事項")
             hr
-            .date-todo
-              h2 2021/07/18
-              .row
-                .col-md-2
-                  h3 DOING
-                .col-md-10
-                  ul
-                    li
-                      .item
-                        input(type="checkbox")
-                        span 瑜珈一小時
-                        input.close(type="button", value="x")
-                    li
-                      .item
-                        input(type="checkbox")
-                        span 想一個 side project
-                        input.close(type="button", value="x")
-                    li
-                      .item
-                        input(type="checkbox")
-                        span 線上課程看一單元
-                        input.close(type="button", value="x")
+            each items, date in LIST
+              .date-todo
+                h2= date
+                .row
+                  .col-md-2
+                    h3 DOING
+                  .col-md-10
+                    ul
+                      //- show doing item
+                      each item in items.doing
+                        li
+                          .item
+                            input(type="checkbox")
+                            span= item.text
+                            input.close(type="button", value="x")
               hr
-              .row
-                .col-md-2
-                  h3 DONE
-                .col-md-10
-                  ul
-                    li
-                      .item
-                        input(type="checkbox")
-                        span 背10個單字
-                        input.close(type="button", value="x")
-                    li
-                      .item
-                        input(type="checkbox")
-                        span 整理書櫃
-                        input.close(type="button", value="x")
-                    li
-                      .item
-                        input(type="checkbox")
-                        span 寫一篇文章
-                        input.close(type="button", value="x")
