@@ -26,4 +26,14 @@ router.post("/items", (req, res, next) => {
   return res.redirect("/");
 });
 
+router.post("/items/delete", (req, res, next) => {
+  const idx = LIST[req.body.itemDate].doing.findIndex(
+    (item) => item.id === req.body.itemId
+  );
+
+  LIST[req.body.itemDate].doing.splice(idx, 1);
+
+  return res.redirect("/");
+});
+
 module.exports = router;

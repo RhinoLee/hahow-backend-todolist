@@ -29,22 +29,22 @@ block content
                 input.input-control(type="date", name="itemDate")
                 input.input-control(type="text", name="itemText", placeholder="請輸入待辦事項")
             hr
-            form(method="POST", action="/items/delete")
-              each items, date in LIST
-                input(type="hidden", name="date", value=date)
-                .date-todo
-                  h2= date
-                  .row
-                    .col-md-2
-                      h3 DOING
-                    .col-md-10
-                      ul
-                        //- show doing item
-                        each item in items.doing
+            each items, date in LIST
+              .date-todo
+                h2= date
+                .row
+                  .col-md-2
+                    h3 DOING
+                  .col-md-10
+                    ul
+                      //- show doing item
+                      each item in items.doing
+                        form(method="POST", action="/items/delete")
                           li
                             .item
                               input(type="checkbox")
                               span= item.text
                               input.close(type="submit", value="x")
-                              input(type="hidden", value=item.id)
-                hr
+                              input(type="hidden", name="itemId", value=item.id)
+                              input(type="hidden", name="itemDate", value=date)
+              hr
