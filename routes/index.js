@@ -1,4 +1,5 @@
 var express = require("express");
+var uuidv4 = require("uuid").v4;
 var router = express.Router();
 
 const LIST = {};
@@ -18,6 +19,7 @@ router.post("/items", (req, res, next) => {
   }
 
   LIST[req.body.itemDate].doing.push({
+    id: uuidv4(),
     text: req.body.itemText,
   });
 
