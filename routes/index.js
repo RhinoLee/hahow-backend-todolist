@@ -15,6 +15,7 @@ router.post("/items", (req, res, next) => {
     // initial date
     LIST[req.body.itemDate] = {
       doing: [],
+      done: [],
     };
   }
 
@@ -34,6 +35,29 @@ router.post("/items/delete", (req, res, next) => {
   LIST[req.body.itemDate].doing.splice(idx, 1);
 
   return res.redirect("/");
+});
+
+router.put("/items/state", (req, res, next) => {
+  const { itemDate, itemState, itemId } = req.body;
+
+  const idx = LIST[itemDate][itemState].findIndex((item) => item.id === itemId);
+
+  if (idx === -1) {
+    return res.json({
+      success: false,
+    });
+  }
+
+  const item = LIST[itemDate][itemState].splice(idx, 1)[0];
+  const toState = itemState === "doing" ? "done" : "doing";
+
+  LIST[itemDate][toState].push(item);
+
+  return res.json({
+    success: true,
+    item,
+    toState,
+  });
 });
 
 module.exports = router;
