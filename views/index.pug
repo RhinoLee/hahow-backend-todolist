@@ -57,7 +57,7 @@ block content
                         form(method="POST", action="/items/delete")
                           li
                             .item
-                              input.check-state(type="checkbox", data-item-state="done")
+                              input.check-state(type="checkbox", data-item-state="done", checked=true)
                               span= item.text
                               input.close(type="submit", value="x")
                               input(type="hidden", name="itemId", value=item.id)
