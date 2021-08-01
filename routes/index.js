@@ -51,9 +51,7 @@ router.put("/items/state", (req, res, next) => {
   const idx = LIST[itemDate][itemState].findIndex((item) => item.id === itemId);
 
   if (idx === -1) {
-    return res.json({
-      success: false,
-    });
+    return res.fail();
   }
 
   const item = LIST[itemDate][itemState].splice(idx, 1)[0];
@@ -61,8 +59,7 @@ router.put("/items/state", (req, res, next) => {
 
   LIST[itemDate][toState].push(item);
 
-  return res.json({
-    success: true,
+  return res.success({
     item,
     toState,
   });
