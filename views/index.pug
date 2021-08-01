@@ -18,9 +18,56 @@ block content
               span #{user.name} | 登出
             else
               span 登入
-          //- #login-info.txt-center
-          //-   img.headshot
-          //-   span 使用者 | 登出
-          //- #login-info.txt-center
-          //-   img.headshot
-          //-   span 登入
+    #content.conainer-fluid
+      .row
+        .col-md-3
+          #left-block
+        .col-md-9
+          #right-block
+            #additem.txt-center
+              input.input-control(type="date")
+              input.input-control(type="text" placeholder="看線上課程一單元")
+            hr
+            .date-todo
+              h3 2021/07/18
+              .row
+                .col-md-2
+                  h2 DOING
+                .col-md-10
+                  ul
+                    li
+                      .item
+                        input(type="checkbox")
+                        span 瑜珈一小時
+                        input.close(type="button", value="x")
+                    li
+                      .item
+                        input(type="checkbox")
+                        span 想一個 side project
+                        input.close(type="button", value="x")
+                    li
+                      .item
+                        input(type="checkbox")
+                        span 線上課程看一單元
+                        input.close(type="button", value="x")
+              hr
+              .row
+                .col-md-2
+                  h2 DONE
+                .col-md-10
+                  ul
+                    li
+                      .item
+                        input(type="checkbox" checked="true")
+                        span 背10個單字
+                        input.close(type="button", value="x")
+                    li
+                      .item
+                        input(type="checkbox" checked="true")
+                        span 整理書櫃
+                        input.close(type="button", value="x")
+                    li
+                      .item
+                        input(type="checkbox" checked="true")
+                        span 寫一篇文章
+                        input.close(type="button", value="x")
