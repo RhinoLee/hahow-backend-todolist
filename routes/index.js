@@ -1,4 +1,6 @@
 var express = require("express");
+var uuidv4 = require("uuid").v4;
+
 var router = express.Router();
 
 const LIST = {};
@@ -25,8 +27,19 @@ router.post("/items", (req, res, next) => {
   }
 
   LIST[itemDate].doing.push({
+    id: uuidv4(),
     text: itemText,
   });
+
+  return res.redirect("/");
+});
+
+router.post("/items/delete", (req, res, next) => {
+  const idx = LIST[req.body.itemDate].doing.findIndex(
+    (item) => item.id === req.body.itemId
+  );
+
+  LIST[req.body.itemDate].doing.splice(idx, 1);
 
   return res.redirect("/");
 });

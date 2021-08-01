@@ -38,8 +38,12 @@ block content
                   .col-md-10
                     ul
                       each item in items.doing
-                        li
-                          .item
-                            input(type="checkbox")
-                            span= item.text
-                            input.close(type="button", value="x")
+                        form(method="POST" action="/items/delete")
+                          li
+                            .item
+                              input(type="checkbox")
+                              span= item.text
+                              input.close(type="submit", value="x")
+                              input(type="hidden" name="itemId" value=item.id)
+                              input(type="hidden" name="itemDate" value=date)
+              hr
