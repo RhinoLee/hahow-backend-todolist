@@ -41,9 +41,49 @@ block content
                         form(method="POST" action="/items/delete")
                           li
                             .item
-                              input(type="checkbox")
+                              input.check-state(type="checkbox", data-item-state="doing")
+                              span= item.text
+                              input.close(type="submit", value="x")
+                              input(type="hidden" name="itemId" value=item.id)
+                              input(type="hidden" name="itemDate" value=date)
+                .row
+                  .col-md-2
+                    h2 DONE
+                  .col-md-10
+                    ul
+                      each item in items.done
+                        form(method="POST" action="/items/delete")
+                          li
+                            .item
+                              input.check-state(type="checkbox", data-item-state="done", checked="true")
                               span= item.text
                               input.close(type="submit", value="x")
                               input(type="hidden" name="itemId" value=item.id)
                               input(type="hidden" name="itemDate" value=date)
               hr
+  script.
+    $(()=>{
+      $(".check-state").on("change", async e => {
+        const currentCheckbox = $(e.target);
+
+        const itemState = currentCheckbox.data("item-state");
+        const itemId = currentCheckbox.siblings("[name=itemId]").val();
+        const itemDate = currentCheckbox.siblings("[name=itemDate]").val();
+
+        const result = await (await fetch("/items/state", {
+          body: JSON.stringify({
+            itemId,
+            itemDate,
+            itemState
+          }),
+          headers: {
+            "content-type": "application/json"
+          },
+          method: "PUT"
+        })).json();
+
+        if (result.success) {
+          window.location.reload();
+        }
+      });
+    });
