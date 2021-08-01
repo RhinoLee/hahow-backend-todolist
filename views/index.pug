@@ -1,5 +1,26 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div
+    #top.container-fluid
+      .row
+        .col-3
+          #weather.txt-center
+            img.icon(src="./img/sunny.png")
+            span 36&deg;C
+        .col-6
+          #title.txt-center
+            h1 TODO LIST
+        .col-3
+          #login-info.txt-center
+            img.headshot
+            if user
+              span #{user.name} | 登出
+            else
+              span 登入
+          //- #login-info.txt-center
+          //-   img.headshot
+          //-   span 使用者 | 登出
+          //- #login-info.txt-center
+          //-   img.headshot
+          //-   span 登入

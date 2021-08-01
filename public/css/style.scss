@@ -1,0 +1,179 @@
+$main-color: #084887;
+$white-color: #f8f9fa;
+
+@mixin vertical-center() {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@mixin height-center($height) {
+  line-height: $height;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serifs;
+}
+
+.icon {
+  width: 50px;
+}
+
+#top {
+  height: 100px;
+  background-color: $main-color;
+  color: $white-color;
+  @include height-center(100px);
+
+  span {
+    font-size: 22px;
+    @include vertical-center();
+    margin-left: 5px;
+  }
+
+  #title {
+    color: $white-color;
+
+    h1 {
+      @include height-center(100px);
+    }
+  }
+
+  #login-info {
+    .headshot {
+      background-color: #874c19;
+      height: 45px;
+      width: 45px;
+      border-radius: 100%;
+      border: 2px solid $white-color;
+    }
+  }
+}
+
+#content {
+  #left-block {
+    background-color: #f7f5fb;
+
+    .todo-date {
+      .headline {
+        background-color: #f9dc5c;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        h3 {
+          font-weight: bold;
+          margin-bottom: 0px;
+        }
+      }
+
+      .item-year {
+        h2 {
+          button {
+            font-size: 22px;
+            font-weight: bold;
+          }
+        }
+
+        & > h2 {
+          button {
+            color: $main-color;
+          }
+        }
+
+        .item-month {
+          & > h2 {
+            button {
+              color: #429ea6;
+            }
+          }
+
+          .date-block {
+            height: 275px;
+            overflow-y: scroll;
+
+            ul {
+              padding-left: 0px;
+
+              li {
+                text-align: center;
+                padding: 10px;
+                font-size: 18px;
+
+                &:hover {
+                  background-color: #ecebe4;
+                }
+
+                a {
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #right-block {
+    #additem {
+      .input-control {
+        height: 50px;
+        border-radius: 5px;
+        letter-spacing: 1px;
+        padding: 10px;
+        margin: 20px;
+      }
+    }
+
+    .date-todo {
+      h2 {
+        text-align: center;
+      }
+
+      h3 {
+        margin-bottom: 20px;
+      }
+
+      ul {
+        list-style-type: decimal;
+
+        li {
+          margin-bottom: 20px;
+          padding: 10px;
+
+          &:hover {
+            background-color: #f9dc5c;
+          }
+
+          .item {
+            display: inline-flex;
+            vertical-align: middle;
+
+            input[type="checkbox"] {
+              width: 30px;
+              height: 30px;
+            }
+
+            span {
+              font-size: 20px;
+              margin: 0px 10px;
+            }
+
+            .close {
+              width: 50px;
+              height: 25px;
+              border-radius: 5px;
+              background-color: $white-color;
+              font-size: 12px;
+              margin-top: 2px;
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
