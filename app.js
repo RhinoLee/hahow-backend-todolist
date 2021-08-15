@@ -1,3 +1,5 @@
+require("newrelic");
+
 var express = require("express");
 var path = require("path");
 var createError = require("http-errors");
