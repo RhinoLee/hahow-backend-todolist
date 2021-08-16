@@ -48,14 +48,14 @@ router.post("/items", async (req, res, next) => {
 
   const { itemText, itemDate } = req.body;
 
-  let day = await db.collection("TodoList").findOne({
-    _id: itemDate,
-  });
-
   const item = {
     id: uuidv4(),
     text: itemText,
   };
+
+  let day = await db.collection("TodoList").findOne({
+    _id: itemDate,
+  });
 
   if (day) {
     await db.collection("TodoList").updateOne(
