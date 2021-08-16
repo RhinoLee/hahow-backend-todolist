@@ -12,6 +12,12 @@ const client = new MongoClient(MONGODB_URL);
 
 const router = express.Router();
 
+const getDb = async () => {
+  await client.connect();
+
+  return client.db(MONGODB_DATABASE_NAME);
+};
+
 router.get("/", async (req, res, next) => {
   const db = await getDb();
 
@@ -150,11 +156,5 @@ router.put("/items/state", async (req, res, next) => {
     toState,
   });
 });
-
-const getDb = async () => {
-  await client.connect();
-
-  return client.db(MONGODB_DATABASE_NAME);
-};
 
 module.exports = router;
