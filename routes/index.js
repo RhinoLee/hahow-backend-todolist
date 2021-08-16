@@ -53,7 +53,7 @@ router.post("/items", async (req, res, next) => {
     text: itemText,
   };
 
-  let day = await db.collection("TodoList").findOne({
+  const day = await db.collection("TodoList").findOne({
     _id: itemDate,
   });
 
