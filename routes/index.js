@@ -1,60 +1,160 @@
-var express = require("express");
-var uuidv4 = require("uuid").v4;
-var router = express.Router();
+const express = require("express");
+const uuidv4 = require("uuid").v4;
+const dotenv = require("dotenv");
+const { MongoClient } = require("mongodb");
 
-const LIST = {};
+dotenv.config();
 
-router.get("/", (req, res, next) => {
+const MONGODB_URL = process.env.MONGODB_URL;
+const MONGODB_DATABASE_NAME = process.env.MONGODB_DATABASE_NAME;
+
+const client = new MongoClient(MONGODB_URL);
+
+const router = express.Router();
+
+router.get("/", async (req, res, next) => {
+  const db = await getDb();
+
+  const days = await db
+    .collection("TodoList")
+    .find()
+    .sort({
+      _id: -1,
+    })
+    .toArray();
+
+  const LIST = {};
+
+  days.forEach((day) => {
+    LIST[day._id] = {
+      done: day.done,
+      doing: day.doing,
+    };
+  });
+
   return res.render("index", {
     LIST,
   });
 });
 
-router.post("/items", (req, res, next) => {
-  if (!LIST[req.body.itemDate]) {
-    // initial date
-    LIST[req.body.itemDate] = {
-      doing: [],
-      done: [],
-    };
-  }
+router.post("/items", async (req, res, next) => {
+  const db = await getDb();
 
-  LIST[req.body.itemDate].doing.push({
-    id: uuidv4(),
-    text: req.body.itemText,
+  const { itemText, itemDate } = req.body;
+
+  let day = await db.collection("TodoList").findOne({
+    _id: itemDate,
   });
 
+  const item = {
+    id: uuidv4(),
+    text: itemText,
+  };
+
+  if (day) {
+    await db.collection("TodoList").updateOne(
+      {
+        _id: itemDate,
+      },
+      {
+        $push: {
+          doing: item,
+        },
+      }
+    );
+  } else {
+    await db.collection("TodoList").insertOne({
+      _id: itemDate,
+      doing: [item],
+      done: [],
+    });
+  }
+
   return res.redirect("/");
 });
 
-router.post("/items/delete", (req, res, next) => {
-  const idx = LIST[req.body.itemDate].doing.findIndex(
-    (item) => item.id === req.body.itemId
+router.post("/items/delete", async (req, res, next) => {
+  const db = await getDb();
+
+  await db.collection("TodoList").updateOne(
+    {
+      _id: req.body.itemDate,
+    },
+    {
+      $pull: {
+        [req.body.itemState]: {
+          id: req.body.itemId,
+        },
+      },
+    }
   );
 
-  LIST[req.body.itemDate].doing.splice(idx, 1);
-
   return res.redirect("/");
 });
 
-router.put("/items/state", (req, res, next) => {
+router.put("/items/state", async (req, res, next) => {
   const { itemDate, itemState, itemId } = req.body;
 
-  const idx = LIST[itemDate][itemState].findIndex((item) => item.id === itemId);
+  const db = await getDb();
 
-  if (idx === -1) {
+  const projection = {};
+
+  projection[`${itemState}.$`] = 1;
+
+  const day = await db.collection("TodoList").findOne(
+    {
+      _id: itemDate,
+      [itemState]: {
+        $elemMatch: {
+          id: itemId,
+        },
+      },
+    },
+    projection
+  );
+
+  if (!day) {
     return res.fail();
   }
 
-  const item = LIST[itemDate][itemState].splice(idx, 1)[0];
+  await db.collection("TodoList").updateOne(
+    {
+      _id: itemDate,
+    },
+    {
+      $pull: {
+        [itemState]: {
+          id: itemId,
+        },
+      },
+    }
+  );
+
   const toState = itemState === "doing" ? "done" : "doing";
 
-  LIST[itemDate][toState].push(item);
+  const item = day[itemState][0];
+
+  await db.collection("TodoList").updateOne(
+    {
+      _id: itemDate,
+    },
+    {
+      $push: {
+        [toState]: item,
+      },
+    }
+  );
 
   return res.success({
     item,
     toState,
   });
 });
+
+const getDb = async () => {
+  await client.connect();
+
+  return client.db(MONGODB_DATABASE_NAME);
+};
 
 module.exports = router;
