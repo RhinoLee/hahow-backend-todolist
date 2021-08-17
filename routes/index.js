@@ -2,13 +2,22 @@ const express = require("express");
 const uuidv4 = require("uuid").v4;
 const dotenv = require("dotenv");
 const { MongoClient } = require("mongodb");
+const redis = require("redis");
+const { promisify } = require("util");
 
 dotenv.config();
 
 const MONGODB_URL = process.env.MONGODB_URL;
 const MONGODB_DATABASE_NAME = process.env.MONGODB_DATABASE_NAME;
+const REDIS_URL = process.env.REDIS_URL;
 
 const client = new MongoClient(MONGODB_URL);
+
+const redisClient = redis.createClient(REDIS_URL);
+
+const rSet = promisify(redisClient.set).bind(redisClient);
+const rGet = promisify(redisClient.get).bind(redisClient);
+const rDel = promisify(redisClient.del).bind(redisClient);
 
 const router = express.Router();
 
@@ -19,24 +28,19 @@ const getDb = async () => {
 };
 
 router.get("/", async (req, res, next) => {
-  const db = await getDb();
+  let LIST = await rGet("todo-list");
 
-  const days = await db
-    .collection("TodoList")
-    .find()
-    .sort({
-      _id: -1,
-    })
-    .toArray();
+  if (!LIST) {
+    const db = await getDb();
 
-  const LIST = {};
+    LIST = await getDays(db);
 
-  days.forEach((day) => {
-    LIST[day._id] = {
-      done: day.done,
-      doing: day.doing,
-    };
-  });
+    LIST = JSON.stringify(LIST);
+
+    await rSet("todo-list", LIST);
+  }
+
+  LIST = JSON.parse(LIST);
 
   return res.render("index", {
     LIST,
@@ -76,6 +80,8 @@ router.post("/items", async (req, res, next) => {
     });
   }
 
+  await rDel("todo-list");
+
   return res.redirect("/");
 });
 
@@ -94,6 +100,8 @@ router.post("/items/delete", async (req, res, next) => {
       },
     }
   );
+
+  await rDel("todo-list");
 
   return res.redirect("/");
 });
@@ -151,10 +159,33 @@ router.put("/items/state", async (req, res, next) => {
     }
   );
 
+  await rDel("todo-list");
+
   return res.success({
     item,
     toState,
   });
 });
+
+const getDays = async (db) => {
+  const days = await db
+    .collection("TodoList")
+    .find()
+    .sort({
+      _id: -1,
+    })
+    .toArray();
+
+  const LIST = {};
+
+  days.forEach((day) => {
+    LIST[day._id] = {
+      done: day.done,
+      doing: day.doing,
+    };
+  });
+
+  return LIST;
+};
 
 module.exports = router;
