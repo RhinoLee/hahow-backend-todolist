@@ -111,21 +111,14 @@ router.put("/items/state", async (req, res, next) => {
 
   const db = await getDb();
 
-  const projection = {};
-
-  projection[`${itemState}.$`] = 1;
-
-  const day = await db.collection("TodoList").findOne(
-    {
-      _id: itemDate,
-      [itemState]: {
-        $elemMatch: {
-          id: itemId,
-        },
+  const day = await db.collection("TodoList").findOne({
+    _id: itemDate,
+    [itemState]: {
+      $elemMatch: {
+        id: itemId,
       },
     },
-    projection
-  );
+  });
 
   if (!day) {
     return res.fail();
