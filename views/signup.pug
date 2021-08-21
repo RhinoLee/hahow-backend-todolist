@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div
+    .container
+      form(method="POST", action="/signup")
+        .row
+          .col
+            input.input-control(name="name", type="text", placeholder="請輸入帳號")
+        .row
+          .col
+            input.input-control(name="password", type="password", placeholder="請輸入密碼")
+        .row
+          .col
+            input.btn.btn-primary(type="submit", value="註冊")

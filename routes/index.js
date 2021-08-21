@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const { MongoClient } = require("mongodb");
 const redis = require("redis");
 const { promisify } = require("util");
+const bcrypt = require("bcrypt");
 
 dotenv.config();
 
@@ -30,6 +31,14 @@ const getDb = async () => {
 router.get("/", async (req, res, next) => {
   let LIST = await rGet("todo-list");
 
+  let user;
+
+  if (req.cookies.token) {
+    user = {
+      name: req.cookies.name,
+    };
+  }
+
   if (!LIST) {
     const db = await getDb();
 
@@ -44,7 +53,95 @@ router.get("/", async (req, res, next) => {
 
   return res.render("index", {
     LIST,
+    user,
   });
+});
+
+router.get("/signup", (req, res, next) => {
+  return res.render("signup");
+});
+
+router.post("/signup", async (req, res, next) => {
+  const db = await getDb();
+
+  const { name, password } = req.body;
+
+  const hash = await bcrypt.hash(password, 10);
+
+  await db.collection("User").insertOne({
+    name,
+    password: hash,
+  });
+
+  return res.redirect("/");
+});
+
+router.get("/login", (req, res, next) => {
+  return res.render("login");
+});
+
+router.post("/login", async (req, res, next) => {
+  const db = await getDb();
+
+  const { name, password } = req.body;
+
+  const user = await db.collection("User").findOne({
+    name,
+  });
+
+  if (!user) {
+    return res.render("login", {
+      message: "無此使用者",
+    });
+  }
+
+  const compareResult = await bcrypt.compare(password, user.password);
+
+  if (!compareResult) {
+    return res.render("login", {
+      message: "密碼錯誤",
+    });
+  }
+
+  const token = uuidv4();
+
+  await db.collection("User").updateOne(
+    {
+      name,
+    },
+    {
+      $set: {
+        token,
+      },
+    }
+  );
+
+  res.cookie("token", token);
+  res.cookie("name", user.name);
+
+  return res.redirect("/");
+});
+
+router.get("/logout", async (req, res, next) => {
+  const db = await getDb();
+
+  const { name, token } = req.cookies;
+
+  await db.collection("User").updateOne(
+    {
+      name,
+    },
+    {
+      $unset: {
+        token,
+      },
+    }
+  );
+
+  res.clearCookie("token");
+  res.clearCookie("name");
+
+  return res.redirect("/");
 });
 
 router.post("/items", async (req, res, next) => {

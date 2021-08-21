@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  div
+    .container
+      if message
+        .row
+          .col
+            .alert.alert-danger(role="alert")= message
+      form(method="POST", action="/login")
+        .row
+          .col
+            input.input-control(name="name", type="text", placeholder="請輸入帳號")
+        .row
+          .col
+            input.input-control(name="password", type="password", placeholder="請輸入密碼")
+        .row
+          .col
+            input.btn.btn-primary(type="submit", value="登入")
