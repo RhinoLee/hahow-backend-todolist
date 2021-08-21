@@ -5,12 +5,14 @@ const { MongoClient } = require("mongodb");
 const redis = require("redis");
 const { promisify } = require("util");
 const bcrypt = require("bcrypt");
+const axios = require("axios").default;
 
 dotenv.config();
 
 const MONGODB_URL = process.env.MONGODB_URL;
 const MONGODB_DATABASE_NAME = process.env.MONGODB_DATABASE_NAME;
 const REDIS_URL = process.env.REDIS_URL;
+const CWB_API_KEY = process.env.CWB_API_KEY;
 
 const client = new MongoClient(MONGODB_URL);
 
@@ -51,9 +53,24 @@ router.get("/", async (req, res, next) => {
 
   LIST = JSON.parse(LIST);
 
+  const cwbData = await axios.get(
+    `https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=${CWB_API_KEY}&stationId=466920`
+  );
+
+  const location = cwbData.data.records.location[0];
+
+  const temp = location.weatherElement.find(
+    (elem) => elem.elementName === "TEMP"
+  ).elementValue;
+
+  const info = location.weatherElement.find(
+    (elem) => elem.elementName === "Weather"
+  ).elementValue;
+
   return res.render("index", {
     LIST,
     user,
+    weather: `${info} ${temp} 度C`,
   });
 });
 
