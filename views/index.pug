@@ -15,10 +15,11 @@ block content
           #login-info.txt-center
             img.headshot
             if user
-              span #{user.name} | 登出
+              a.btn.btn-secondary(href="/logout", role="button") #{user.name} | 登出
             else
-              span 登入
-    #content.conainer-fluid
+              a.btn.btn-primary(href="/login", role="button") 登入
+              a.btn.btn-secondary(href="/signup", role="button") 註冊
+    #content.container-fluid
       .row
         .col-md-3
           #left-block

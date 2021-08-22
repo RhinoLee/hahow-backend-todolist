@@ -4,6 +4,7 @@ var dotenv = require("dotenv");
 var redis = require("redis");
 var { promisify } = require("util");
 var { MongoClient } = require("mongodb");
+var bcrypt = require("bcrypt");
 
 dotenv.config();
 
@@ -51,6 +52,25 @@ const getDays = async () => {
   return LIST;
 };
 
+router.get("/signup", async (req, res, next) => {
+  return res.render("signup");
+});
+
+router.post("/signup", async (req, res, next) => {
+  const db = await getDb();
+
+  const { name, password } = req.body;
+
+  const hash = await bcrypt.hash(password, 10);
+
+  await db.collection("User").insertOne({
+    name,
+    password: hash,
+  });
+
+  return res.redirect("/");
+});
+
 router.get("/", async (req, res, next) => {
   console.time("get all");
 
@@ -73,9 +93,6 @@ router.get("/", async (req, res, next) => {
   console.timeEnd("get all");
 
   return res.render("index", {
-    user: {
-      name: "kewang",
-    },
     LIST,
   });
 });
