@@ -71,8 +71,84 @@ router.post("/signup", async (req, res, next) => {
   return res.redirect("/");
 });
 
+router.get("/login", async (req, res, next) => {
+  return res.render("login");
+});
+
+router.post("/login", async (req, res, next) => {
+  const db = await getDb();
+
+  const { name, password } = req.body;
+
+  const user = await db.collection("User").findOne({
+    name,
+  });
+
+  if (!user) {
+    return res.render("login", {
+      message: "無此使用者",
+    });
+  }
+
+  const compareResult = await bcrypt.compare(password, user.password);
+
+  if (!compareResult) {
+    return res.render("login", {
+      message: "密碼錯誤",
+    });
+  }
+
+  const token = uuidv4();
+
+  await db.collection("User").updateOne(
+    {
+      name,
+    },
+    {
+      $set: {
+        token,
+      },
+    }
+  );
+
+  res.cookie("token", token);
+  res.cookie("name", user.name);
+
+  return res.redirect("/");
+});
+
+router.get("/logout", async (req, res, next) => {
+  const db = await getDb();
+
+  const { name, token } = req.cookies;
+
+  await db.collection("User").updateOne(
+    {
+      name,
+    },
+    {
+      $unset: {
+        token,
+      },
+    }
+  );
+
+  res.clearCookie("token");
+  res.clearCookie("name");
+
+  return res.redirect("/");
+});
+
 router.get("/", async (req, res, next) => {
   console.time("get all");
+
+  let user;
+
+  if (req.cookies.token) {
+    user = {
+      name: req.cookies.name,
+    };
+  }
 
   let LIST = await rGet("todo-list");
 
@@ -94,6 +170,7 @@ router.get("/", async (req, res, next) => {
 
   return res.render("index", {
     LIST,
+    user,
   });
 });
 
