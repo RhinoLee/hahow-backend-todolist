@@ -46,6 +46,7 @@ block content
                               input.close(type="submit", value="x")
                               input(type="hidden" name="itemId" value=item.id)
                               input(type="hidden" name="itemDate" value=date)
+                              input(type="hidden" name="itemState" value="doing")
                 .row
                   .col-md-2
                     h2 DONE
@@ -60,6 +61,7 @@ block content
                               input.close(type="submit", value="x")
                               input(type="hidden" name="itemId" value=item.id)
                               input(type="hidden" name="itemDate" value=date)
+                              input(type="hidden" name="itemState" value="done")
               hr
   script.
     $(()=>{
