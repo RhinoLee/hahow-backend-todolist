@@ -1,14 +1,22 @@
 var express = require("express");
 var uuidv4 = require("uuid").v4;
 var dotenv = require("dotenv");
+var redis = require("redis");
+var { promisify } = require("util");
 var { MongoClient } = require("mongodb");
 
 dotenv.config();
 
 const MONGODB_URL = process.env.MONGODB_URL;
 const MONGODB_DATABASE_NAME = process.env.MONGODB_DATABASE_NAME;
+const REDIS_URL = process.env.REDIS_URL;
 
 const client = new MongoClient(MONGODB_URL);
+const redisClient = redis.createClient(REDIS_URL);
+
+const rGet = promisify(redisClient.get).bind(redisClient);
+const rSet = promisify(redisClient.set).bind(redisClient);
+const rDel = promisify(redisClient.del).bind(redisClient);
 
 var router = express.Router();
 
@@ -20,7 +28,7 @@ const getDb = async () => {
   return client.db(MONGODB_DATABASE_NAME);
 };
 
-router.get("/", async (req, res, next) => {
+const getDays = async () => {
   const db = await getDb();
 
   const days = await db
@@ -39,6 +47,30 @@ router.get("/", async (req, res, next) => {
       done: day.done,
     };
   });
+
+  return LIST;
+};
+
+router.get("/", async (req, res, next) => {
+  console.time("get all");
+
+  let LIST = await rGet("todo-list");
+
+  if (LIST) {
+    console.log("use Redis");
+  } else {
+    LIST = await getDays();
+
+    LIST = JSON.stringify(LIST);
+
+    await rSet("todo-list", LIST);
+
+    console.log("use DB");
+  }
+
+  LIST = JSON.parse(LIST);
+
+  console.timeEnd("get all");
 
   return res.render("index", {
     user: {
@@ -81,6 +113,8 @@ router.post("/items", async (req, res, next) => {
     });
   }
 
+  await rDel("todo-list");
+
   return res.redirect("/");
 });
 
@@ -101,6 +135,8 @@ router.post("/items/delete", async (req, res, next) => {
       },
     }
   );
+
+  await rDel("todo-list");
 
   return res.redirect("/");
 });
@@ -150,6 +186,8 @@ router.put("/items/state", async (req, res, next) => {
       },
     }
   );
+
+  await rDel("todo-list");
 
   return res.success({
     item,
