@@ -1,5 +1,54 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div 
+    #top.container-fluid
+      .row 
+        .col-3 
+          #weather.txt-center
+            img.icon(src="../template/img/sunny.png")
+            span 36&deg;C
+        .col-6 
+          #title.txt-center 
+            h1 TODO LIST
+        .col-3 
+            #login-info.txt-center 
+              if user 
+                img.headshot
+                span #{user.name} | 登出
+              else 
+                span 登入
+    #content.container-fluid 
+      .row 
+        .col-md-3 
+        .col-md-9 
+          #right-block  
+            #additem.txt-center 
+              input.input-control(type="date" value="")
+              input.input-control(type="text" placeholder="看線上課程一單元")
+            hr 
+            .date-todo 
+              h3 2021/07/18 
+              .row 
+                .col-md-2 
+                  h2 DOING
+                .col-md-10 
+                  ul 
+                    each todo in todos
+                      li
+                        .item 
+                          input(type="checkbox")
+                          span #{todo.title}
+                          input.close(type="button" value="x")
+              hr 
+              .row 
+                .col-md-2 
+                  h2 DONE
+                .col-md-10 
+                  ul 
+                    each todo in doneTodos
+                      li
+                        .item 
+                          input(type="checkbox" checked="true")
+                          span #{todo.title}
+                          input.close(type="button" value="x")
